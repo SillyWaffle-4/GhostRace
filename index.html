@@ -15,16 +15,26 @@
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             background: #000;
+            width: 100%;
+            height: 100%;
+        }
+
+        html {
+            width: 100%;
+            height: 100%;
         }
 
         #game-container {
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             position: relative;
+            display: block;
         }
 
         canvas {
             display: block;
+            width: 100%;
+            height: 100%;
             background: #1a1a1a;
         }
 
@@ -75,7 +85,7 @@
         }
 
         .modal.hidden {
-            display: none;
+            display: none !important;
         }
 
         .modal-content {
@@ -86,6 +96,7 @@
             color: white;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             animation: slideIn 0.3s ease-out;
+            max-width: 500px;
         }
 
         @keyframes slideIn {
@@ -153,18 +164,19 @@
             font-size: 14px;
             text-align: center;
             z-index: 10;
+            max-width: 90%;
         }
     </style>
 </head>
 <body>
     <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
         <div id="hud">
             <div id="level-display">Level <span id="level-number">1</span>/10</div>
             <div id="timer">0.0s</div>
             <div id="level-title">Urban Jungle</div>
         </div>
-        
-        <canvas id="gameCanvas"></canvas>
         
         <div id="level-complete" class="modal hidden">
             <div class="modal-content">
