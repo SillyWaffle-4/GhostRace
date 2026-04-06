@@ -158,8 +158,7 @@ class Game {
     constructor() {
         this.canvas = document.getElementById('gameCanvas');
         this.ctx = this.canvas.getContext('2d');
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        this.resizeCanvas();
 
         this.player = null;
         this.platforms = [];
@@ -183,6 +182,11 @@ class Game {
         this.keys = {};
         this.setupEventListeners();
         this.createLevels();
+    }
+
+    resizeCanvas() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
     }
 
     setupEventListeners() {
@@ -210,8 +214,7 @@ class Game {
         });
 
         window.addEventListener('resize', () => {
-            this.canvas.width = window.innerWidth;
-            this.canvas.height = window.innerHeight;
+            this.resizeCanvas();
         });
     }
 
@@ -567,22 +570,24 @@ class Game {
     }
 }
 
+let game;
+
 function startGame() {
-    window.game = new Game();
-    window.game.startGame();
+    game = new Game();
+    game.startGame();
 }
 
 function nextLevel() {
-    if (window.game.currentLevel < 9) {
+    if (game.currentLevel < 9) {
         document.getElementById('level-complete').classList.add('hidden');
-        window.game.loadLevel(window.game.currentLevel + 1);
-        window.game.gameRunning = true;
-        window.game.gameLoop();
+        game.loadLevel(game.currentLevel + 1);
+        game.gameRunning = true;
+        game.gameLoop();
     }
 }
 
 function restartLevel() {
-    window.game.restartLevel();
+    game.restartLevel();
 }
 
 function goToMenu() {
