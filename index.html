@@ -18,13 +18,14 @@
         }
 
         #game-container {
-            width: 100%;
+            width: 100vw;
             height: 100vh;
+            position: relative;
         }
 
         canvas {
             display: block;
-            background: #000;
+            background: #1a1a1a;
         }
 
         #hud {
@@ -33,39 +34,44 @@
             left: 20px;
             color: white;
             font-size: 18px;
-            z-index: 100;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: bold;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
-        #level-display, #timer, #level-title {
+        #level-display {
+            font-size: 24px;
             margin-bottom: 10px;
         }
 
         #timer {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 28px;
+            color: #ff6b6b;
+            font-family: 'Courier New', monospace;
         }
 
-        #controls-info {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            text-align: center;
-            z-index: 100;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        #level-title {
+            font-size: 16px;
+            color: #4ecdc4;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .modal {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.95);
-            border: 3px solid #00ff41;
-            border-radius: 10px;
-            z-index: 200;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
         }
 
         .modal.hidden {
@@ -73,44 +79,80 @@
         }
 
         .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 40px;
+            border-radius: 15px;
             text-align: center;
             color: white;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .modal-content h1 {
             font-size: 48px;
             margin-bottom: 20px;
-            color: #00ff41;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
         }
 
         .modal-content h2 {
             font-size: 36px;
             margin-bottom: 20px;
-            color: #00ff41;
         }
 
         .modal-content p {
             font-size: 18px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
 
         .modal-content button {
-            background: #00ff41;
-            color: #000;
+            background: #ff6b6b;
+            color: white;
             border: none;
             padding: 12px 30px;
-            margin: 10px;
             font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: all 0.3s;
+            margin: 10px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .modal-content button:hover {
-            background: #00cc33;
-            transform: scale(1.05);
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .modal-content button:active {
+            transform: translateY(0);
+        }
+
+        #controls-info {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: #4ecdc4;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+            z-index: 10;
         }
     </style>
 </head>
