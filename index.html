@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkour Masters</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #game-container {
+            width: 100%;
+            height: 100vh;
+        }
+
+        canvas {
+            display: block;
+            background: #000;
+        }
+
+        #hud {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 18px;
+            z-index: 100;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        #level-display, #timer, #level-title {
+            margin-bottom: 10px;
+        }
+
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #controls-info {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            z-index: 100;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 3px solid #00ff41;
+            border-radius: 10px;
+            z-index: 200;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal-content {
+            padding: 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .modal-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #00ff41;
+        }
+
+        .modal-content h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #00ff41;
+        }
+
+        .modal-content p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content button {
+            background: #00ff41;
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            margin: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .modal-content button:hover {
+            background: #00cc33;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="hud">
+            <div id="level-display">Level <span id="level-number">1</span>/10</div>
+            <div id="timer">0.0s</div>
+            <div id="level-title">Urban Jungle</div>
+        </div>
+        
+        <canvas id="gameCanvas"></canvas>
+        
+        <div id="level-complete" class="modal hidden">
+            <div class="modal-content">
+                <h2>Level Complete!</h2>
+                <p id="completion-time">Time: 0.0s</p>
+                <button onclick="nextLevel()">Next Level</button>
+            </div>
+        </div>
+        
+        <div id="game-over" class="modal hidden">
+            <div class="modal-content">
+                <h2>Game Over!</h2>
+                <p>You fell!</p>
+                <button onclick="restartLevel()">Retry Level</button>
+                <button onclick="goToMenu()">Main Menu</button>
+            </div>
+        </div>
+        
+        <div id="main-menu" class="modal">
+            <div class="modal-content">
+                <h1>🏃 Parkour Masters</h1>
+                <p>Navigate treacherous platforms with precision!</p>
+                <p>Master double jumps, dashes, and weird mechanics!</p>
+                <button onclick="startGame()">Start Game</button>
+            </div>
+        </div>
+        
+        <div id="controls-info">
+            <p><strong>Arrow Keys</strong> or <strong>A/D</strong> to move | <strong>SPACE</strong> to jump | <strong>Shift</strong> to dash | <strong>R</strong> to restart</p>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
