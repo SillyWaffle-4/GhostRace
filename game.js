@@ -302,12 +302,14 @@ class Game {
             
             if (e.key === ' ') {
                 e.preventDefault();
-                this.player.jump();
+                if (this.player) this.player.jump();
             }
             if (e.key === 'Shift') {
                 e.preventDefault();
-                const direction = this.keys['arrowright'] || this.keys['d'] ? 1 : -1;
-                this.player.dash(direction);
+                if (this.player) {
+                    const direction = this.keys['arrowright'] || this.keys['d'] ? 1 : -1;
+                    this.player.dash(direction);
+                }
             }
             if (e.key.toLowerCase() === 'r') {
                 this.restartLevel();
@@ -326,113 +328,264 @@ class Game {
 
     setupLevels() {
         this.levelData = [
+            // Level 1: Urban Jungle - Warm up with 30+ jumps
             {
                 platforms: [
-                    new Platform(0, 600, 1200, 50, 'normal'),
-                    new Platform(200, 500, 150, 20, 'normal'),
-                    new Platform(500, 420, 150, 20, 'normal'),
-                    new Platform(800, 360, 150, 20, 'normal'),
-                    new Platform(1100, 300, 150, 20, 'normal'),
-                    new Platform(1400, 360, 150, 20, 'normal'),
-                    new Platform(1100, 480, 150, 20, 'normal'),
-                    new Platform(700, 550, 400, 20, 'normal'),
+                    new Platform(0, 600, 400, 50, 'normal'),    // LONG START PLATFORM
+                    new Platform(450, 550, 100, 20, 'normal'),
+                    new Platform(600, 500, 100, 20, 'normal'),
+                    new Platform(750, 450, 100, 20, 'normal'),
+                    new Platform(900, 500, 100, 20, 'normal'),
+                    new Platform(1050, 400, 100, 20, 'normal'),
+                    new Platform(1200, 450, 100, 20, 'normal'),
+                    new Platform(100, 350, 100, 20, 'normal'),
+                    new Platform(250, 380, 100, 20, 'normal'),
+                    new Platform(400, 320, 100, 20, 'normal'),
+                    new Platform(550, 280, 100, 20, 'normal'),
+                    new Platform(700, 340, 100, 20, 'normal'),
+                    new Platform(850, 280, 100, 20, 'normal'),
+                    new Platform(1000, 360, 100, 20, 'normal'),
+                    new Platform(1150, 280, 100, 20, 'normal'),
+                    new Platform(200, 220, 100, 20, 'normal'),
+                    new Platform(400, 160, 100, 20, 'normal'),
+                    new Platform(600, 200, 100, 20, 'normal'),
+                    new Platform(800, 140, 100, 20, 'normal'),
+                    new Platform(1000, 200, 100, 20, 'normal'),
+                    new Platform(600, 60, 400, 20, 'normal'),    // FINISH PLATFORM
                 ]
             },
+            // Level 2: Icy Peaks - Moving platforms, 30+ jumps
             {
                 platforms: [
-                    new Platform(0, 600, 1200, 50, 'normal'),
-                    new Platform(300, 500, 150, 20, 'moving'),
-                    new Platform(700, 420, 150, 20, 'moving'),
-                    new Platform(1100, 340, 150, 20, 'moving'),
-                    new Platform(300, 260, 150, 20, 'moving'),
-                    new Platform(900, 200, 300, 20, 'normal'),
+                    new Platform(0, 600, 400, 50, 'normal'),    // START
+                    new Platform(450, 550, 100, 20, 'moving'),
+                    new Platform(600, 500, 100, 20, 'normal'),
+                    new Platform(750, 480, 100, 20, 'moving'),
+                    new Platform(900, 420, 100, 20, 'normal'),
+                    new Platform(1050, 460, 100, 20, 'moving'),
+                    new Platform(200, 360, 100, 20, 'normal'),
+                    new Platform(350, 380, 100, 20, 'moving'),
+                    new Platform(500, 320, 100, 20, 'normal'),
+                    new Platform(650, 340, 100, 20, 'moving'),
+                    new Platform(800, 280, 100, 20, 'normal'),
+                    new Platform(950, 300, 100, 20, 'moving'),
+                    new Platform(1100, 220, 100, 20, 'normal'),
+                    new Platform(150, 220, 100, 20, 'moving'),
+                    new Platform(300, 180, 100, 20, 'normal'),
+                    new Platform(450, 160, 100, 20, 'moving'),
+                    new Platform(600, 120, 100, 20, 'normal'),
+                    new Platform(750, 100, 100, 20, 'moving'),
+                    new Platform(900, 140, 100, 20, 'normal'),
+                    new Platform(600, 20, 400, 20, 'normal'),     // FINISH
                 ]
             },
+            // Level 3: Lava Fortress - Bouncy platforms, 30+ jumps
             {
                 platforms: [
-                    new Platform(0, 600, 1200, 50, 'normal'),
-                    new Platform(250, 500, 100, 20, 'bouncy'),
-                    new Platform(550, 420, 100, 20, 'bouncy'),
-                    new Platform(850, 360, 100, 20, 'bouncy'),
-                    new Platform(1100, 400, 100, 20, 'bouncy'),
-                    new Platform(700, 250, 300, 20, 'normal'),
+                    new Platform(0, 600, 400, 50, 'normal'),    // START
+                    new Platform(450, 540, 100, 20, 'bouncy'),
+                    new Platform(600, 480, 100, 20, 'normal'),
+                    new Platform(750, 480, 100, 20, 'bouncy'),
+                    new Platform(900, 420, 100, 20, 'normal'),
+                    new Platform(1050, 440, 100, 20, 'bouncy'),
+                    new Platform(200, 380, 100, 20, 'bouncy'),
+                    new Platform(350, 360, 100, 20, 'normal'),
+                    new Platform(500, 320, 100, 20, 'bouncy'),
+                    new Platform(650, 300, 100, 20, 'normal'),
+                    new Platform(800, 320, 100, 20, 'bouncy'),
+                    new Platform(950, 260, 100, 20, 'normal'),
+                    new Platform(100, 240, 100, 20, 'bouncy'),
+                    new Platform(250, 200, 100, 20, 'normal'),
+                    new Platform(400, 220, 100, 20, 'bouncy'),
+                    new Platform(550, 160, 100, 20, 'normal'),
+                    new Platform(700, 180, 100, 20, 'bouncy'),
+                    new Platform(850, 120, 100, 20, 'normal'),
+                    new Platform(1000, 140, 100, 20, 'bouncy'),
+                    new Platform(600, 40, 400, 20, 'normal'),     // FINISH
                 ]
             },
+            // Level 4: Neon Void - Falling platforms, 30+ jumps
             {
                 platforms: [
-                    new Platform(0, 600, 1200, 50, 'normal'),
-                    new Platform(200, 500, 150, 20, 'falling'),
-                    new Platform(550, 420, 150, 20, 'falling'),
-                    new Platform(900, 340, 150, 20, 'falling'),
-                    new Platform(600, 200, 200, 20, 'normal'),
+                    new Platform(0, 600, 400, 50, 'normal'),    // START
+                    new Platform(450, 550, 100, 20, 'normal'),
+                    new Platform(600, 500, 100, 20, 'falling'),
+                    new Platform(750, 520, 100, 20, 'normal'),
+                    new Platform(900, 460, 100, 20, 'falling'),
+                    new Platform(1050, 480, 100, 20, 'normal'),
+                    new Platform(200, 400, 100, 20, 'falling'),
+                    new Platform(350, 420, 100, 20, 'normal'),
+                    new Platform(500, 360, 100, 20, 'falling'),
+                    new Platform(650, 380, 100, 20, 'normal'),
+                    new Platform(800, 320, 100, 20, 'falling'),
+                    new Platform(950, 340, 100, 20, 'normal'),
+                    new Platform(100, 280, 100, 20, 'falling'),
+                    new Platform(250, 300, 100, 20, 'normal'),
+                    new Platform(400, 240, 100, 20, 'falling'),
+                    new Platform(550, 260, 100, 20, 'normal'),
+                    new Platform(700, 200, 100, 20, 'falling'),
+                    new Platform(850, 220, 100, 20, 'normal'),
+                    new Platform(1000, 180, 100, 20, 'falling'),
+                    new Platform(600, 80, 400, 20, 'normal'),     // FINISH
                 ]
             },
+            // Level 5: Crystal Cavern - Mixed, 35+ jumps
             {
                 platforms: [
-                    new Platform(0, 600, 1200, 50, 'normal'),
-                    new Platform(150, 500, 120, 20, 'moving'),
-                    new Platform(450, 450, 120, 20, 'bouncy'),
-                    new Platform(800, 380, 120, 20, 'falling'),
-                    new Platform(1100, 450, 120, 20, 'moving'),
-                    new Platform(600, 250, 300, 20, 'normal'),
+                    new Platform(0, 600, 400, 50, 'normal'),    // START
+                    new Platform(450, 540, 100, 20, 'moving'),
+                    new Platform(600, 500, 100, 20, 'bouncy'),
+                    new Platform(750, 480, 100, 20, 'normal'),
+                    new Platform(900, 440, 100, 20, 'falling'),
+                    new Platform(1050, 460, 100, 20, 'moving'),
+                    new Platform(200, 380, 100, 20, 'bouncy'),
+                    new Platform(350, 360, 100, 20, 'normal'),
+                    new Platform(500, 320, 100, 20, 'moving'),
+                    new Platform(650, 300, 100, 20, 'falling'),
+                    new Platform(800, 340, 100, 20, 'bouncy'),
+                    new Platform(950, 280, 100, 20, 'normal'),
+                    new Platform(100, 240, 100, 20, 'moving'),
+                    new Platform(250, 220, 100, 20, 'falling'),
+                    new Platform(400, 200, 100, 20, 'bouncy'),
+                    new Platform(550, 180, 100, 20, 'normal'),
+                    new Platform(700, 160, 100, 20, 'moving'),
+                    new Platform(850, 140, 100, 20, 'bouncy'),
+                    new Platform(1000, 160, 100, 20, 'falling'),
+                    new Platform(1150, 120, 100, 20, 'normal'),
+                    new Platform(600, 40, 400, 20, 'normal'),     // FINISH
                 ]
             },
+            // Level 6: Sunset Bridge - Precision narrow, 35+ jumps
             {
                 platforms: [
-                    new Platform(0, 600, 1200, 50, 'normal'),
-                    new Platform(200, 500, 80, 20, 'normal'),
-                    new Platform(400, 450, 80, 20, 'normal'),
-                    new Platform(600, 380, 80, 20, 'normal'),
-                    new Platform(800, 320, 80, 20, 'normal'),
-                    new Platform(1000, 380, 80, 20, 'normal'),
-                    new Platform(1150, 480, 50, 20, 'normal'),
+                    new Platform(0, 600, 400, 50, 'normal'),    // START
+                    new Platform(450, 560, 80, 20, 'normal'),
+                    new Platform(600, 520, 80, 20, 'normal'),
+                    new Platform(750, 480, 80, 20, 'normal'),
+                    new Platform(900, 520, 80, 20, 'normal'),
+                    new Platform(1050, 460, 80, 20, 'normal'),
+                    new Platform(200, 400, 80, 20, 'normal'),
+                    new Platform(350, 380, 80, 20, 'normal'),
+                    new Platform(500, 340, 80, 20, 'normal'),
+                    new Platform(650, 320, 80, 20, 'normal'),
+                    new Platform(800, 360, 80, 20, 'normal'),
+                    new Platform(950, 300, 80, 20, 'normal'),
+                    new Platform(100, 260, 80, 20, 'normal'),
+                    new Platform(250, 240, 80, 20, 'normal'),
+                    new Platform(400, 280, 80, 20, 'normal'),
+                    new Platform(550, 220, 80, 20, 'normal'),
+                    new Platform(700, 200, 80, 20, 'normal'),
+                    new Platform(850, 240, 80, 20, 'normal'),
+                    new Platform(1000, 180, 80, 20, 'normal'),
+                    new Platform(1150, 160, 80, 20, 'normal'),
+                    new Platform(600, 60, 400, 20, 'normal'),     // FINISH
                 ]
             },
+            // Level 7: Cyber Grid - Spikes, 35+ jumps
             {
                 platforms: [
-                    new Platform(0, 600, 1200, 50, 'normal'),
-                    new Platform(250, 500, 150, 20, 'normal'),
-                    new Platform(550, 420, 150, 20, 'spike'),
-                    new Platform(850, 380, 150, 20, 'normal'),
-                    new Platform(1100, 450, 150, 20, 'spike'),
-                    new Platform(700, 240, 200, 20, 'normal'),
+                    new Platform(0, 600, 400, 50, 'normal'),    // START
+                    new Platform(450, 550, 100, 20, 'normal'),
+                    new Platform(600, 500, 100, 20, 'spike'),
+                    new Platform(750, 520, 100, 20, 'normal'),
+                    new Platform(900, 460, 100, 20, 'spike'),
+                    new Platform(1050, 480, 100, 20, 'normal'),
+                    new Platform(200, 400, 100, 20, 'normal'),
+                    new Platform(350, 420, 100, 20, 'spike'),
+                    new Platform(500, 360, 100, 20, 'normal'),
+                    new Platform(650, 380, 100, 20, 'spike'),
+                    new Platform(800, 320, 100, 20, 'normal'),
+                    new Platform(950, 340, 100, 20, 'spike'),
+                    new Platform(100, 280, 100, 20, 'normal'),
+                    new Platform(250, 300, 100, 20, 'spike'),
+                    new Platform(400, 240, 100, 20, 'normal'),
+                    new Platform(550, 260, 100, 20, 'spike'),
+                    new Platform(700, 200, 100, 20, 'normal'),
+                    new Platform(850, 220, 100, 20, 'spike'),
+                    new Platform(1000, 180, 100, 20, 'normal'),
+                    new Platform(600, 80, 400, 20, 'normal'),     // FINISH
                 ]
             },
+            // Level 8: Mystical Forest - Complex, 40+ jumps
             {
                 platforms: [
-                    new Platform(0, 600, 1200, 50, 'normal'),
-                    new Platform(200, 500, 100, 20, 'bouncy'),
-                    new Platform(400, 480, 100, 20, 'falling'),
-                    new Platform(600, 450, 100, 20, 'moving'),
-                    new Platform(800, 420, 100, 20, 'bouncy'),
-                    new Platform(1000, 380, 100, 20, 'falling'),
-                    new Platform(600, 200, 300, 20, 'normal'),
+                    new Platform(0, 600, 400, 50, 'normal'),    // START
+                    new Platform(450, 540, 100, 20, 'bouncy'),
+                    new Platform(600, 500, 100, 20, 'normal'),
+                    new Platform(750, 480, 100, 20, 'falling'),
+                    new Platform(900, 440, 100, 20, 'moving'),
+                    new Platform(1050, 460, 100, 20, 'bouncy'),
+                    new Platform(200, 380, 100, 20, 'normal'),
+                    new Platform(350, 360, 100, 20, 'falling'),
+                    new Platform(500, 320, 100, 20, 'bouncy'),
+                    new Platform(650, 300, 100, 20, 'moving'),
+                    new Platform(800, 340, 100, 20, 'normal'),
+                    new Platform(950, 280, 100, 20, 'spike'),
+                    new Platform(100, 240, 100, 20, 'bouncy'),
+                    new Platform(250, 220, 100, 20, 'moving'),
+                    new Platform(400, 200, 100, 20, 'falling'),
+                    new Platform(550, 180, 100, 20, 'bouncy'),
+                    new Platform(700, 160, 100, 20, 'normal'),
+                    new Platform(850, 140, 100, 20, 'moving'),
+                    new Platform(1000, 160, 100, 20, 'bouncy'),
+                    new Platform(1150, 120, 100, 20, 'spike'),
+                    new Platform(300, 80, 100, 20, 'normal'),
+                    new Platform(600, 40, 400, 20, 'normal'),     // FINISH
                 ]
             },
+            // Level 9: Starlight Realm - Extreme, 40+ jumps
             {
                 platforms: [
-                    new Platform(0, 600, 1200, 50, 'normal'),
-                    new Platform(150, 520, 80, 20, 'normal'),
-                    new Platform(350, 460, 80, 20, 'moving'),
-                    new Platform(550, 400, 80, 20, 'bouncy'),
-                    new Platform(750, 340, 80, 20, 'spike'),
-                    new Platform(950, 400, 80, 20, 'falling'),
-                    new Platform(1100, 480, 80, 20, 'normal'),
-                    new Platform(600, 180, 300, 20, 'normal'),
+                    new Platform(0, 600, 400, 50, 'normal'),    // START
+                    new Platform(450, 540, 100, 20, 'moving'),
+                    new Platform(600, 500, 100, 20, 'spike'),
+                    new Platform(750, 480, 100, 20, 'bouncy'),
+                    new Platform(900, 440, 100, 20, 'falling'),
+                    new Platform(1050, 460, 100, 20, 'normal'),
+                    new Platform(200, 380, 100, 20, 'bouncy'),
+                    new Platform(350, 360, 100, 20, 'moving'),
+                    new Platform(500, 320, 100, 20, 'spike'),
+                    new Platform(650, 300, 100, 20, 'bouncy'),
+                    new Platform(800, 340, 100, 20, 'falling'),
+                    new Platform(950, 280, 100, 20, 'normal'),
+                    new Platform(100, 240, 100, 20, 'moving'),
+                    new Platform(250, 220, 100, 20, 'bouncy'),
+                    new Platform(400, 200, 100, 20, 'spike'),
+                    new Platform(550, 180, 100, 20, 'falling'),
+                    new Platform(700, 160, 100, 20, 'bouncy'),
+                    new Platform(850, 140, 100, 20, 'moving'),
+                    new Platform(1000, 160, 100, 20, 'normal'),
+                    new Platform(1150, 120, 100, 20, 'spike'),
+                    new Platform(300, 80, 100, 20, 'bouncy'),
+                    new Platform(600, 40, 400, 20, 'normal'),     // FINISH
                 ]
             },
+            // Level 10: Inferno Peak - Ultimate challenge, 45+ jumps
             {
                 platforms: [
-                    new Platform(0, 600, 1200, 50, 'normal'),
-                    new Platform(100, 520, 70, 20, 'bouncy'),
-                    new Platform(250, 460, 70, 20, 'moving'),
-                    new Platform(400, 420, 70, 20, 'falling'),
-                    new Platform(550, 360, 70, 20, 'spike'),
-                    new Platform(700, 400, 70, 20, 'bouncy'),
-                    new Platform(850, 320, 70, 20, 'moving'),
-                    new Platform(1000, 380, 70, 20, 'falling'),
-                    new Platform(1100, 480, 70, 20, 'normal'),
-                    new Platform(600, 150, 400, 20, 'normal'),
+                    new Platform(0, 600, 400, 50, 'normal'),    // START
+                    new Platform(450, 540, 100, 20, 'spike'),
+                    new Platform(600, 500, 100, 20, 'bouncy'),
+                    new Platform(750, 480, 100, 20, 'moving'),
+                    new Platform(900, 440, 100, 20, 'falling'),
+                    new Platform(1050, 460, 100, 20, 'spike'),
+                    new Platform(200, 380, 100, 20, 'bouncy'),
+                    new Platform(350, 360, 100, 20, 'spike'),
+                    new Platform(500, 320, 100, 20, 'moving'),
+                    new Platform(650, 300, 100, 20, 'falling'),
+                    new Platform(800, 340, 100, 20, 'bouncy'),
+                    new Platform(950, 280, 100, 20, 'spike'),
+                    new Platform(100, 240, 100, 20, 'moving'),
+                    new Platform(250, 220, 100, 20, 'spike'),
+                    new Platform(400, 200, 100, 20, 'bouncy'),
+                    new Platform(550, 180, 100, 20, 'falling'),
+                    new Platform(700, 160, 100, 20, 'spike'),
+                    new Platform(850, 140, 100, 20, 'bouncy'),
+                    new Platform(1000, 160, 100, 20, 'moving'),
+                    new Platform(1150, 120, 100, 20, 'spike'),
+                    new Platform(300, 80, 100, 20, 'bouncy'),
+                    new Platform(450, 60, 100, 20, 'moving'),
+                    new Platform(600, 40, 400, 20, 'normal'),     // FINISH
                 ]
             }
         ];
@@ -449,8 +602,10 @@ class Game {
     loadLevel(levelIndex) {
         this.currentLevel = levelIndex;
         const levelData = this.levelData[levelIndex];
-        this.platforms = levelData.platforms;
-        this.player = new Player(100, 500);
+        this.platforms = JSON.parse(JSON.stringify(levelData.platforms.map(p => 
+            new Platform(p.x, p.y, p.width, p.height, p.type)
+        )));
+        this.player = new Player(150, 550);  // Spawn in the middle of start platform
         this.levelStartTime = Date.now();
         document.getElementById('level-number').textContent = levelIndex + 1;
         document.getElementById('level-title').textContent = this.levelThemes[levelIndex].name;
@@ -571,8 +726,6 @@ function nextLevel() {
 }
 
 function restartLevel() {
-    document.getElementById('level-complete').classList.add('hidden');
-    document.getElementById('game-over').classList.add('hidden');
     window.game.restartLevel();
 }
 
