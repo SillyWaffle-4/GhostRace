@@ -474,7 +474,11 @@ class Game {
     loadLevel(levelIndex) {
         this.currentLevel = levelIndex;
         this.platforms = this.levels[levelIndex];
-        this.player = new Player(150, 550);
+        
+        // Spawn on the first platform
+        const firstPlatform = this.platforms[0];
+        this.player = new Player(firstPlatform.x + firstPlatform.width / 2, firstPlatform.y - 40);
+        
         this.levelStartTime = Date.now();
         document.getElementById('level-number').textContent = levelIndex + 1;
         document.getElementById('level-title').textContent = this.levelThemes[levelIndex].name;
