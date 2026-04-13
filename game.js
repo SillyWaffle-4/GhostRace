@@ -609,3 +609,30 @@ function goToMenu() {
     document.getElementById('game-over').classList.add('hidden');
     document.getElementById('main-menu').classList.remove('hidden');
 }
+
+// Event listeners - CSP compliant
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('btn-start-game').addEventListener('click', () => {
+        gameInstance = new Game();
+        gameInstance.startGame();
+    });
+
+    document.getElementById('btn-next-level').addEventListener('click', () => {
+        if (gameInstance.currentLevel < 9) {
+            document.getElementById('level-complete').classList.add('hidden');
+            gameInstance.loadLevel(gameInstance.currentLevel + 1);
+            gameInstance.gameRunning = true;
+            gameInstance.gameLoop();
+        }
+    });
+
+    document.getElementById('btn-retry-level').addEventListener('click', () => {
+        gameInstance.restartLevel();
+    });
+
+    document.getElementById('btn-menu-from-gameover').addEventListener('click', () => {
+        document.getElementById('level-complete').classList.add('hidden');
+        document.getElementById('game-over').classList.add('hidden');
+        document.getElementById('main-menu').classList.remove('hidden');
+    });
+});
